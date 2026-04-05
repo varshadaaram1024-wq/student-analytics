@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card p-4 shadow">
+
+    <h2 class="text-center">👤 Student Profile</h2>
+
+    <table class="table table-bordered mt-3">
+        {% for key, value in student.items() %}
+        <tr>
+            <th>{{ key }}</th>
+            <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+{% endblock %}

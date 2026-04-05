@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Performance Breakdown</h2>
+
+<div class="row">
+    {% for category, count in performance.items() %}
+    <div class="col-md-4 mb-3">
+        <a href="/performance/{{ category }}" class="text-decoration-none text-dark">
+            <div class="card p-3 text-center shadow">
+                <h4>{{ category }}</h4>
+                <p>{{ count }} Students</p>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
