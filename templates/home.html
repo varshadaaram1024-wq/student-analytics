@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-center mb-4">📊 Dashboard Overview</h2>
+
+<!-- SUMMARY CARDS -->
+<div class="row text-center mb-5">
+    <div class="col-md-6 mb-3">
+        <div class="card shadow p-4">
+            <h5>Total Students</h5>
+            <h2>{{ total }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <div class="card shadow p-4">
+            <h5>Average Percentage</h5>
+            <h2>{{ average }}%</h2>
+        </div>
+    </div>
+</div>
+
+<!-- PERFORMANCE CHART -->
+<div class="card shadow p-4 mb-5">
+    <h4 class="text-center mb-3">Performance Distribution</h4>
+    <canvas id="performanceChart"></canvas>
+</div>
+
+<!-- CLASS CHART -->
+<div class="card shadow p-4">
+    <h4 class="text-center mb-3">Class Distribution</h4>
+    <canvas id="classChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Performance Chart
+    new Chart(document.getElementById('performanceChart'), {
+        type: 'bar',
+        data: {
+            labels: {{ performance.keys() | list | safe }},
+            datasets: [{
+                label: 'Students',
+                data: {{ performance.values() | list | safe }},
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+
+    // Class Chart
+    new Chart(document.getElementById('classChart'), {
+        type: 'bar',
+        data: {
+            labels: {{ classes.keys() | list | safe }},
+            datasets: [{
+                label: 'Students',
+                data: {{ classes.values() | list | safe }},
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

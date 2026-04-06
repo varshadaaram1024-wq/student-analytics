@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Quiz</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<style>
+body{
+background: linear-gradient(135deg,#667eea,#764ba2);
+color:white;
+}
+.box{
+background:rgba(255,255,255,0.15);
+padding:30px;
+border-radius:15px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<h2 class="text-center mb-4">Subject Quiz</h2>
+
+<div class="box">
+
+<form method="POST">
+
+<!-- SUBJECT SELECT -->
+<label>Select Subject:</label>
+<select name="subject" class="form-control" required>
+<option value="">--Select--</option>
+<option value="programming">Programming</option>
+<option value="math">Mathematics</option>
+<option value="communication">Communication</option>
+</select>
+
+<br>
+
+<button class="btn btn-light">Start Quiz</button>
+
+</form>
+
+<!-- SHOW QUESTIONS ONLY AFTER SELECT -->
+
+{% if questions %}
+
+<form method="POST">
+
+<input type="hidden" name="subject" value="{{ subject }}">
+
+{% for q in questions %}
+
+<p><b>{{ loop.index }}. {{ q[0] }}</b></p>
+
+<input type="radio" name="q{{ loop.index }}" value="a"> {{ q[2][0] }}<br>
+<input type="radio" name="q{{ loop.index }}" value="b"> {{ q[2][1] }}<br><br>
+
+{% endfor %}
+
+<button class="btn btn-light">Submit Quiz</button>
+
+</form>
+
+{% endif %}
+
+<!-- RESULT -->
+
+{% if score is not none %}
+
+<div class="alert alert-success mt-4 text-dark">
+<b>Your Score:</b> {{ score }}/8
+</div>
+
+{% if score >= 7 %}
+<div class="alert alert-info text-dark">
+Excellent! 🚀
+</div>
+{% elif score >= 4 %}
+<div class="alert alert-warning text-dark">
+Good, but improve 👍
+</div>
+{% else %}
+<div class="alert alert-danger text-dark">
+Needs improvement. Practice more!
+</div>
+{% endif %}
+
+{% endif %}
+
+</div>
+
+<div class="text-center mt-3">
+<a href="/admin" class="btn btn-light">Back</a>
+</div>
+
+</div>
+
+</body>
+</html>

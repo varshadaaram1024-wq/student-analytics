@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Learning Modules</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<style>
+body{
+background: linear-gradient(135deg,#667eea,#764ba2);
+color:white;
+}
+.box{
+background:rgba(255,255,255,0.15);
+padding:30px;
+border-radius:15px;
+}
+a{
+color:yellow;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+<h2 class="text-center mb-4">Learning Modules</h2>
+
+<div class="box">
+
+{% for subject, videos in modules.items() %}
+
+<h4>{{ subject }}</h4>
+<ul>
+{% for v in videos %}
+<li>
+{{ v.title }} -
+<a href="{{ v.link }}" target="_blank">Watch</a>
+</li>
+{% endfor %}
+</ul>
+
+<hr>
+
+{% endfor %}
+
+</div>
+
+<div class="text-center mt-3">
+<a href="/admin" class="btn btn-light">Back</a>
+</div>
+
+</div>
+
+</body>
+</html>
